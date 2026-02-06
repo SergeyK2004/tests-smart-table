@@ -1,0 +1,21 @@
+{
+  "name": "tests-smart-table",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node run-tests.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.7.2",
+    "playwright": "^1.56.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "shelljs": "^0.10.0"
+  }
+}
