@@ -9,7 +9,7 @@ test.describe('Кнопка сброса', () => {
   });
 
   test('Очищает поиск и фильтры и показывает все строки', async ({ page }) => {
-    await search(page, 'petr');
+    await search(page, 'иван');
     await selectSeller(page, sellers[0]);
     await page.fill(selectors.filterTotalFrom, '100');
     await page.fill(selectors.filterTotalTo, '5000');

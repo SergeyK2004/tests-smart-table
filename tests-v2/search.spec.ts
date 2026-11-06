@@ -12,20 +12,20 @@ test.describe('Поиск', () => {
   });
 
   test('Находит строки по части имени покупателя или продавца', async ({ page }) => {
-    const expected = found('petr');
-    await search(page, 'petr');
+    const expected = found('иван');
+    await search(page, 'иван');
 
-    await expectRows(page, expected.slice(0, 10), 'По запросу "petr" в таблице не те строки');
-    await expectStatus(page, 1, 10, expected.length, `По запросу "petr" ждали ${expected.length} строк из ${data.length}`);
+    await expectRows(page, expected.slice(0, 10), 'По запросу "иван" в таблице не те строки');
+    await expectStatus(page, 1, 10, expected.length, `По запросу "иван" ждали ${expected.length} строк из ${data.length}`);
   });
 
   test('Ищет без учёта регистра', async ({ page }) => {
-    const expected = found('petr');
-    await search(page, 'PETR');
+    const expected = found('иван');
+    await search(page, 'ИВАН');
 
     await expectStatus(
       page, 1, 10, expected.length,
-      `По запросу "PETR" ждали столько же строк, сколько по "petr", — ${expected.length}. ` +
+      `По запросу "ИВАН" ждали столько же строк, сколько по "иван", — ${expected.length}. ` +
         'К нижнему регистру нужно привести и значения строки, и сам запрос',
     );
   });
@@ -46,7 +46,7 @@ test.describe('Поиск', () => {
   });
 
   test('Очистка поля поиска возвращает все строки', async ({ page }) => {
-    await search(page, 'petr');
+    await search(page, 'иван');
     await search(page, '');
 
     await expectRows(page, data.slice(0, 10), 'После очистки поля поиска должны вернуться первые строки датасета');
@@ -57,7 +57,7 @@ test.describe('Поиск', () => {
     await page.click(selectors.sortByTotal);
     await page.evaluate(() => ((window as any).__notReloaded = true));
 
-    await search(page, 'petr');
+    await search(page, 'иван');
 
     expect(
       await page.evaluate(() => (window as any).__notReloaded),
@@ -66,7 +66,7 @@ test.describe('Поиск', () => {
     await expectSortIcons(page, 'none', 'up', 'После поиска сортировка по сумме должна остаться');
     await expectRows(
       page,
-      sortedBy(found('petr'), 'total', 'up').slice(0, 10),
+      sortedBy(found('иван'), 'total', 'up').slice(0, 10),
       'После поиска строки должны остаться отсортированными по сумме',
     );
   });

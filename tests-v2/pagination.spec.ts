@@ -107,8 +107,8 @@ test.describe('Пагинация', () => {
     // Сбрасываем продавца и уходим на последнюю страницу снова — теперь проверяем поиск
     await selectSeller(page, '');
     await page.click(selectors.lastPage);
-    await search(page, 'petr');
-    const found = data.filter((row) => /petr/i.test(`${row.date} ${row.customer} ${row.seller}`));
+    await search(page, 'иван');
+    const found = data.filter((row) => /иван/i.test(`${row.date} ${row.customer} ${row.seller}`));
     await expectStatus(page, 1, 10, found.length, 'После поиска на последней странице ждали первую страницу');
   });
 

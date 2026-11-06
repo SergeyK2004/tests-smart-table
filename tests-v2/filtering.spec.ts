@@ -61,9 +61,9 @@ test.describe('Фильтры по продавцу и сумме', () => {
   test('Поиск, продавец и сумма работают вместе', async ({ page }) => {
     const expected = data.filter(
       (row) =>
-        row.customer.toLowerCase().includes('andrey') && row.seller === seller && row.total >= 2000 && row.total <= 8000,
+        row.customer.toLowerCase().includes('андрей') && row.seller === seller && row.total >= 2000 && row.total <= 8000,
     );
-    await search(page, 'andrey');
+    await search(page, 'андрей');
     await selectSeller(page, seller);
     await page.fill(selectors.filterTotalFrom, '2000');
     await page.fill(selectors.filterTotalTo, '8000');
@@ -71,7 +71,7 @@ test.describe('Фильтры по продавцу и сумме', () => {
     await expectRows(
       page,
       expected.slice(0, 10),
-      `Поиск "andrey", продавец ${seller} и сумма 2000–8000 — ждали ${expected.length} строк`,
+      `Поиск "андрей", продавец ${seller} и сумма 2000–8000 — ждали ${expected.length} строк`,
     );
   });
 

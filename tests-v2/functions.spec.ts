@@ -4,10 +4,10 @@ import { open } from './helpers/table';
 
 // Маленький набор строк: по нему легко посчитать ответ вручную
 const rows = [
-  { id: 'r1', date: '2024-01-15', customer: 'Andrey Alekseev', seller: 'Ivan Petrov', total: 1500 },
-  { id: 'r2', date: '2023-12-04', customer: 'Petr Smirnov', seller: 'Nikolai Ivanov', total: 4657.56 },
-  { id: 'r3', date: '2024-01-15', customer: 'Olga Ivanova', seller: 'Alexey Petrov', total: 300 },
-  { id: 'r4', date: '2023-11-20', customer: 'Sergey Kuznetsov', seller: 'Ivan Petrov', total: 3000 },
+  { id: 'r1', date: '2024-01-15', customer: 'Андрей Алексеев', seller: 'Иван Петров', total: 1500 },
+  { id: 'r2', date: '2023-12-04', customer: 'Пётр Смирнов', seller: 'Николай Иванов', total: 4657.56 },
+  { id: 'r3', date: '2024-01-15', customer: 'Ольга Иванова', seller: 'Алексей Петров', total: 300 },
+  { id: 'r4', date: '2023-11-20', customer: 'Сергей Кузнецов', seller: 'Иван Петров', total: 3000 },
 ];
 
 const noFilters = { seller: '', totalFrom: '', totalTo: '' };
@@ -24,10 +24,10 @@ test.describe('Функция applySearch (searching.js)', () => {
   };
 
   test('Находит строки по части имени покупателя или продавца', async ({ page }) => {
-    expect(await search(page, 'smirnov'), 'По запросу "smirnov" ждали строку с покупателем Petr Smirnov').toEqual(['r2']);
+    expect(await search(page, 'смирнов'), 'По запросу "смирнов" ждали строку с покупателем Пётр Смирнов').toEqual(['r2']);
     expect(
-      await search(page, 'ivanov'),
-      'По запросу "ivanov" ждали две строки: продавец Nikolai Ivanov и покупатель Olga Ivanova',
+      await search(page, 'иванов'),
+      'По запросу "иванов" ждали две строки: продавец Николай Иванов и покупатель Ольга Иванова',
     ).toEqual(['r2', 'r3']);
   });
 
@@ -37,8 +37,8 @@ test.describe('Функция applySearch (searching.js)', () => {
 
   test('Ищет без учёта регистра', async ({ page }) => {
     expect(
-      await search(page, 'SMIRNOV'),
-      'По запросу "SMIRNOV" ничего не нашлось. К нижнему регистру нужно привести и значения строки, и сам запрос',
+      await search(page, 'СМИРНОВ'),
+      'По запросу "СМИРНОВ" ничего не нашлось. К нижнему регистру нужно привести и значения строки, и сам запрос',
     ).toEqual(['r2']);
   });
 
@@ -61,7 +61,7 @@ test.describe('Функция applyFilters (filtering.js)', () => {
   });
 
   test('Оставляет строки выбранного продавца', async ({ page }) => {
-    expect(await filter(page, { seller: 'Ivan Petrov' }), 'Ждали только строки продавца Ivan Petrov').toEqual(['r1', 'r4']);
+    expect(await filter(page, { seller: 'Иван Петров' }), 'Ждали только строки продавца Иван Петров').toEqual(['r1', 'r4']);
   });
 
   test('Заполнено только «от»: пустое «до» не ограничивает сумму', async ({ page }) => {
@@ -90,8 +90,8 @@ test.describe('Функция applyFilters (filtering.js)', () => {
 
   test('Продавец и сумма работают вместе', async ({ page }) => {
     expect(
-      await filter(page, { seller: 'Ivan Petrov', totalFrom: '2000' }),
-      'Продавец Ivan Petrov и сумма от 2000 — ждали одну строку с суммой 3000',
+      await filter(page, { seller: 'Иван Петров', totalFrom: '2000' }),
+      'Продавец Иван Петров и сумма от 2000 — ждали одну строку с суммой 3000',
     ).toEqual(['r4']);
   });
 });
