@@ -15,12 +15,12 @@ test.describe('Отрисовка: вёрстка и строки таблицы
     await expect(page.locator(selectors.sortByTotal), 'Нет кнопки сортировки по сумме').toBeVisible();
   });
 
-  test('В шапке таблицы четыре колонки: Date, Customer, Seller, Total', async ({ page }) => {
+  test('В шапке таблицы четыре колонки: Дата, Покупатель, Продавец, Сумма', async ({ page }) => {
     const columns = page.locator(selectors.headerColumns);
-    await expect(columns.nth(0)).toContainText('Date');
-    await expect(columns.nth(1)).toContainText('Customer');
-    await expect(columns.nth(2)).toContainText('Seller');
-    await expect(columns.nth(3)).toContainText('Total');
+    await expect(columns.nth(0)).toContainText('Дата');
+    await expect(columns.nth(1)).toContainText('Покупатель');
+    await expect(columns.nth(2)).toContainText('Продавец');
+    await expect(columns.nth(3)).toContainText('Сумма');
   });
 
   test('На странице есть фильтры по продавцу и сумме «от — до»', async ({ page }) => {

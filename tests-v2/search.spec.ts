@@ -42,7 +42,7 @@ test.describe('Поиск', () => {
     await search(page, '__NO_MATCH__');
 
     await expect(page.locator(selectors.rows), 'По запросу без совпадений в таблице не должно быть строк').toHaveCount(0);
-    await expectStatus(page, 0, 0, 0, 'Без совпадений статус — «Showing 0 to 0 of 0 entries»');
+    await expectStatus(page, 0, 0, 0, 'Без совпадений статус — «Строки 0–0 из 0»');
   });
 
   test('Очистка поля поиска возвращает все строки', async ({ page }) => {

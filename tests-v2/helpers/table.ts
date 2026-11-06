@@ -59,7 +59,7 @@ export async function expectRows(page: Page, expected: TableRow[], message: stri
   await expect.poll(() => readRows(page), { message, timeout: TIMEOUT }).toEqual(formatRows(expected));
 }
 
-// Строка «Showing from to to of total entries»
+// Строка «Строки from–to из total»
 export async function expectStatus(page: Page, from: number, to: number, total: number, message: string) {
   await expect
     .poll(
@@ -69,11 +69,11 @@ export async function expectStatus(page: Page, from: number, to: number, total: 
           page.locator(selectors.toRow).innerText(),
           page.locator(selectors.totalRows).innerText(),
         ]);
-        return `Showing ${f.trim()} to ${t.trim()} of ${n.trim()} entries`;
+        return `Строки ${f.trim()}–${t.trim()} из ${n.trim()}`;
       },
       { message, timeout: TIMEOUT },
     )
-    .toBe(`Showing ${from} to ${to} of ${total} entries`);
+    .toBe(`Строки ${from}–${to} из ${total}`);
 }
 
 // Номера страниц в пагинации и номер выделенной
@@ -92,7 +92,7 @@ export async function expectSortIcons(page: Page, date: string, total: string, m
     .poll(async () => {
       const d = await page.locator(selectors.sortByDate).getAttribute('data-value');
       const t = await page.locator(selectors.sortByTotal).getAttribute('data-value');
-      return `Date: ${d}, Total: ${t}`;
+      return `Дата: ${d}, Сумма: ${t}`;
     }, { message, timeout: TIMEOUT })
-    .toBe(`Date: ${date}, Total: ${total}`);
+    .toBe(`Дата: ${date}, Сумма: ${total}`);
 }

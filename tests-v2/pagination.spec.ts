@@ -118,7 +118,7 @@ test.describe('Пагинация', () => {
     await page.click(selectors.lastPage);
     await page.click(selectors.prevPage);
 
-    await expectStatus(page, 0, 0, 0, 'Без совпадений после «вперёд», «последняя», «назад» ждали «Showing 0 to 0 of 0»');
+    await expectStatus(page, 0, 0, 0, 'Без совпадений после «вперёд», «последняя», «назад» ждали «Строки 0–0 из 0»');
     await expectPages(page, [1], 1, 'Без совпадений ждали одну страницу с номером 1');
   });
 
